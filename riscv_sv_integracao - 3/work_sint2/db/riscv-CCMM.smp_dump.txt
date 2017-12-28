@@ -1,0 +1,22 @@
+
+State Machine - |riscv_top|riscv_wishbone:cpu|wshbn_master:wbus|state
+Name state.rd2 state.rd1 state.rd0 state.c2 state.c1 state.c0 state.idle 
+state.idle 0 0 0 0 0 0 0 
+state.c0 0 0 0 0 0 1 1 
+state.c1 0 0 0 0 1 0 1 
+state.c2 0 0 0 1 0 0 1 
+state.rd0 0 0 1 0 0 0 1 
+state.rd1 0 1 0 0 0 0 1 
+state.rd2 1 0 0 0 0 0 1 
+
+State Machine - |riscv_top|riscv_wishbone:cpu|interrupt_controller:int_ctrl|state
+Name state.s0 state.s2 state.s1 
+state.s0 0 0 0 
+state.s1 1 0 1 
+state.s2 1 1 0 
+
+State Machine - |riscv_top|riscv_wishbone:cpu|riscv_cpu_no:cpu1|riscv_fetch:riscv_fetch|state
+Name state.rst state.ready state.idle 
+state.rst 0 0 0 
+state.idle 1 0 1 
+state.ready 1 1 0 

@@ -1,0 +1,10 @@
+I/O Assignment Analysis Status : Successful - Thu Feb 09 18:02:20 2017
+Quartus II 64-Bit Version : 13.1.0 Build 162 10/23/2013 SJ Full Version
+Revision Name : riscv
+Top-level Entity Name : riscv_top
+Family : Cyclone IV E
+Device : EP4CE115F29C7
+Timing Models : Final
+Total pins : 30 / 529 ( 6 % )
+Total virtual pins : 0
+Total PLLs : 1 / 4 ( 25 % )

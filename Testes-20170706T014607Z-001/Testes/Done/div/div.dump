@@ -1,0 +1,97 @@
+
+rv32ui-p-div:     file format elf32-littleriscv
+
+
+Disassembly of section .text:
+
+00002800 <_start>:
+    2800:	50b02573          	csrr	a0,hartid
+    2804:	00051063          	bnez	a0,2804 <_start+0x4>
+    2808:	04000513          	li	a0,64
+    280c:	50a53073          	csrc	status,a0
+
+00002810 <test_2>:
+    2810:	01400093          	li	ra,20
+    2814:	00600113          	li	sp,6
+    2818:	0220c1b3          	div	gp,ra,sp
+    281c:	00300e93          	li	t4,3
+    2820:	00200e13          	li	t3,2
+    2824:	0dd19463          	bne	gp,t4,28ec <fail>
+
+00002828 <test_3>:
+    2828:	fec00093          	li	ra,-20
+    282c:	00600113          	li	sp,6
+    2830:	0220c1b3          	div	gp,ra,sp
+    2834:	ffd00e93          	li	t4,-3
+    2838:	00300e13          	li	t3,3
+    283c:	0bd19863          	bne	gp,t4,28ec <fail>
+
+00002840 <test_4>:
+    2840:	01400093          	li	ra,20
+    2844:	ffa00113          	li	sp,-6
+    2848:	0220c1b3          	div	gp,ra,sp
+    284c:	ffd00e93          	li	t4,-3
+    2850:	00400e13          	li	t3,4
+    2854:	09d19c63          	bne	gp,t4,28ec <fail>
+
+00002858 <test_5>:
+    2858:	fec00093          	li	ra,-20
+    285c:	ffa00113          	li	sp,-6
+    2860:	0220c1b3          	div	gp,ra,sp
+    2864:	00300e93          	li	t4,3
+    2868:	00500e13          	li	t3,5
+    286c:	09d19063          	bne	gp,t4,28ec <fail>
+
+00002870 <test_6>:
+    2870:	000000b7          	lui	ra,0x0
+    2874:	00100113          	li	sp,1
+    2878:	0220c1b3          	div	gp,ra,sp
+    287c:	00000eb7          	lui	t4,0x0
+    2880:	00600e13          	li	t3,6
+    2884:	07d19463          	bne	gp,t4,28ec <fail>
+
+00002888 <test_7>:
+    2888:	000000b7          	lui	ra,0x0
+    288c:	fff00113          	li	sp,-1
+    2890:	0220c1b3          	div	gp,ra,sp
+    2894:	00000eb7          	lui	t4,0x0
+    2898:	00700e13          	li	t3,7
+    289c:	05d19863          	bne	gp,t4,28ec <fail>
+
+000028a0 <test_8>:
+    28a0:	000000b7          	lui	ra,0x0
+    28a4:	00000113          	li	sp,0
+    28a8:	0220c1b3          	div	gp,ra,sp
+    28ac:	fff00e93          	li	t4,-1
+    28b0:	00800e13          	li	t3,8
+    28b4:	03d19c63          	bne	gp,t4,28ec <fail>
+
+000028b8 <test_9>:
+    28b8:	00100093          	li	ra,1
+    28bc:	00000113          	li	sp,0
+    28c0:	0220c1b3          	div	gp,ra,sp
+    28c4:	fff00e93          	li	t4,-1
+    28c8:	00900e13          	li	t3,9
+    28cc:	03d19063          	bne	gp,t4,28ec <fail>
+
+000028d0 <test_10>:
+    28d0:	00000093          	li	ra,0
+    28d4:	00000113          	li	sp,0
+    28d8:	0220c1b3          	div	gp,ra,sp
+    28dc:	fff00e93          	li	t4,-1
+    28e0:	00a00e13          	li	t3,10
+    28e4:	01d19463          	bne	gp,t4,28ec <fail>
+    28e8:	01c01e63          	bne	zero,t3,2904 <pass>
+
+000028ec <fail>:
+    28ec:	0ff0000f          	fence
+    28f0:	000e0863          	beqz	t3,2900 <fail+0x14>
+    28f4:	001e1e13          	slli	t3,t3,0x1
+    28f8:	001e6e13          	ori	t3,t3,1
+    28fc:	51ee1073          	csrw	tohost,t3
+    2900:	0000006f          	j	2900 <fail+0x14>
+
+00002904 <pass>:
+    2904:	0ff0000f          	fence
+    2908:	51e0d073          	csrwi	tohost,1
+    290c:	0000006f          	j	290c <pass+0x8>

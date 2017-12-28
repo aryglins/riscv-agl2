@@ -1,0 +1,83 @@
+32-bit-math
+	parameter CACHE_SIZE 		= 16;	//Cache size in words
+	parameter BLOCK_SIZE		= 2;		//Block size in words
+	parameter NUMBER_OF_SETS 	= 2; 		//Quantity of sets
+	
+	inst = 38
+	clock = 80
+	miss = 3
+	access = 13
+	
+matrix-mul
+	parameter CACHE_SIZE 		= 16;	//Cache size in words
+	parameter BLOCK_SIZE		= 2;		//Block size in words
+	parameter NUMBER_OF_SETS 	= 2; 		//Quantity of sets
+	
+	inst = 840
+	clock = 1706
+	miss = 66
+	access = 255
+	
+matrix-mul
+	parameter CACHE_SIZE 		= 16;	//Cache size in words
+	parameter BLOCK_SIZE		= 2;		//Block size in words
+	parameter NUMBER_OF_SETS 	= 4; 		//Quantity of sets
+	
+	inst = 840
+	clock = 1608
+	miss = 57
+	access = 
+
+matrix-mul
+	parameter CACHE_SIZE 		= 16;	//Cache size in words
+	parameter BLOCK_SIZE		= 4;		//Block size in words
+	parameter NUMBER_OF_SETS 	= 2; 		//Quantity of sets
+	
+	inst = 840
+	clock = 2468
+	miss = 95
+	access = 255
+	
+matrix-mul
+	parameter CACHE_SIZE 		= 32;	//Cache size in words
+	parameter BLOCK_SIZE		= 2;		//Block size in words
+	parameter NUMBER_OF_SETS 	= 2; 		//Quantity of sets
+	
+	inst = 840
+	clock = 1590
+	miss = 51
+	access = 255
+
+matrix-mul
+	parameter CACHE_SIZE 		= 32;	//Cache size in words
+	parameter BLOCK_SIZE		= 2;		//Block size in words
+	parameter NUMBER_OF_SETS 	= 4; 		//Quantity of sets
+	
+	inst = 840
+	clock = 1372
+	miss = 31
+	access = 255
+	
+matrix-mul
+	parameter CACHE_SIZE 		= 64;	//Cache size in words
+	parameter BLOCK_SIZE		= 2;		//Block size in words
+	parameter NUMBER_OF_SETS 	= 2; 		//Quantity of sets
+	
+	inst = 840
+	clock = 1304
+	miss = 24
+	access = 255
+	
+matrix-mul
+	parameter CACHE_SIZE 		= 64;	//Cache size in words
+	parameter BLOCK_SIZE		= 2;		//Block size in words
+	parameter NUMBER_OF_SETS 	= 4; 		//Quantity of sets
+	
+	inst = 840
+	clock = 1296
+	miss = 24
+	access = 255	
+	
+	
+
+	

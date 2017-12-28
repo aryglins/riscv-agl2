@@ -1,0 +1,79 @@
+C:/altera/13.1/quartus/eda/sim_lib/cycloneiv_atoms.v {1 {vlog -work cycloneivgx_ver -vopt C:/altera/13.1/quartus/eda/sim_lib/cycloneiv_atoms.v
+QuestaSim-64 vlog 10.2c Compiler 2013.07 Jul 19 2013
+-- Compiling UDP CYCLONEIV_PRIM_DFFE
+-- Compiling UDP CYCLONEIV_PRIM_DFFEAS
+-- Compiling UDP CYCLONEIV_PRIM_DFFEAS_HIGH
+-- Compiling module cycloneiv_dffe
+-- Compiling module cycloneiv_mux21
+-- Compiling module cycloneiv_mux41
+-- Compiling module cycloneiv_and1
+-- Compiling module cycloneiv_and16
+-- Compiling module cycloneiv_bmux21
+-- Compiling module cycloneiv_b17mux21
+-- Compiling module cycloneiv_nmux21
+-- Compiling module cycloneiv_b5mux21
+-- Compiling module cycloneiv_latch
+-- Compiling module cycloneiv_routing_wire
+-- Compiling module cycloneiv_lcell_comb
+-- Compiling module cycloneiv_io_ibuf
+-- Compiling module cycloneiv_io_obuf
+-- Compiling module cycloneiv_ddio_out
+-- Compiling module cycloneiv_ddio_oe
+-- Compiling module cycloneiv_ff
+-- Compiling module cycloneiv_ram_pulse_generator
+-- Compiling module cycloneiv_ram_register
+-- Compiling module cycloneiv_ram_block
+-- Compiling module cycloneiv_mac_data_reg
+-- Compiling module cycloneiv_mac_sign_reg
+-- Compiling module cycloneiv_mac_mult_internal
+-- Compiling module cycloneiv_mac_mult
+-- Compiling module cycloneiv_mac_out
+-- Compiling module cycloneiv_io_pad
+-- Compiling module cycloneiv_ena_reg
+-- Compiling module cycloneiv_clkctrl
+-- Compiling module cycloneiv_pseudo_diff_out
+-- Compiling module cycloneiv_rublock
+-- Compiling module cycloneiv_termination_ctrl
+-- Compiling module cycloneiv_termination_rupdn
+-- Compiling module cycloneiv_termination
+-- Compiling module cycloneiv_jtag
+-- Compiling module cycloneiv_crcblock
+-- Compiling module cycloneiv_oscillator
+-- Compiling module cycloneiv_controller
+-- Compiling module cycloneiv_m_cntr
+-- Compiling module cycloneiv_n_cntr
+-- Compiling module cycloneiv_scale_cntr
+-- Compiling module cycloneiv_post_divider
+-- Compiling module cycloneiv_pll_reg
+-- Compiling module cycloneiv_pll
+
+Top level modules:
+	cycloneiv_dffe
+	cycloneiv_and1
+	cycloneiv_and16
+	cycloneiv_bmux21
+	cycloneiv_b17mux21
+	cycloneiv_nmux21
+	cycloneiv_b5mux21
+	cycloneiv_lcell_comb
+	cycloneiv_io_ibuf
+	cycloneiv_io_obuf
+	cycloneiv_ddio_out
+	cycloneiv_ddio_oe
+	cycloneiv_ff
+	cycloneiv_ram_block
+	cycloneiv_mac_mult
+	cycloneiv_mac_out
+	cycloneiv_io_pad
+	cycloneiv_clkctrl
+	cycloneiv_pseudo_diff_out
+	cycloneiv_rublock
+	cycloneiv_termination
+	cycloneiv_jtag
+	cycloneiv_crcblock
+	cycloneiv_oscillator
+	cycloneiv_controller
+	cycloneiv_pll_reg
+	cycloneiv_pll
+
+} {} {}}

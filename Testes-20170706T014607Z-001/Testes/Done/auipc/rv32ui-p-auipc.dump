@@ -1,0 +1,45 @@
+
+rv32ui-p-auipc:     file format elf32-littleriscv
+
+
+Disassembly of section .text:
+
+00002800 <_start>:
+    2800:	50b02573          	csrr	a0,hartid
+    2804:	00051063          	bnez	a0,2804 <_start+0x4>
+    2808:	04000513          	li	a0,64
+    280c:	50a53073          	csrc	status,a0
+
+00002810 <test_2>:
+    2810:	00002517          	auipc	a0,0x2
+    2814:	71c50513          	addi	a0,a0,1820 # 4f2c <_end+0x26b4>
+    2818:	004005ef          	jal	a1,281c <test_2+0xc>
+    281c:	40b50533          	sub	a0,a0,a1
+    2820:	00002eb7          	lui	t4,0x2
+    2824:	710e8e93          	addi	t4,t4,1808 # 2710 <begin_signature+0x710>
+    2828:	00200e13          	li	t3,2
+    282c:	03d51463          	bne	a0,t4,2854 <fail>
+
+00002830 <test_3>:
+    2830:	ffffe517          	auipc	a0,0xffffe
+    2834:	8fc50513          	addi	a0,a0,-1796 # 12c <_RAM_START+0x12c>
+    2838:	004005ef          	jal	a1,283c <test_3+0xc>
+    283c:	40b50533          	sub	a0,a0,a1
+    2840:	ffffeeb7          	lui	t4,0xffffe
+    2844:	8f0e8e93          	addi	t4,t4,-1808 # ffffd8f0 <_end+0xffffb078>
+    2848:	00300e13          	li	t3,3
+    284c:	01d51463          	bne	a0,t4,2854 <fail>
+    2850:	01c01e63          	bne	zero,t3,286c <pass>
+
+00002854 <fail>:
+    2854:	0ff0000f          	fence
+    2858:	000e0863          	beqz	t3,2868 <fail+0x14>
+    285c:	001e1e13          	slli	t3,t3,0x1
+    2860:	001e6e13          	ori	t3,t3,1
+    2864:	51ee1073          	csrw	tohost,t3
+    2868:	0000006f          	j	2868 <fail+0x14>
+
+0000286c <pass>:
+    286c:	0ff0000f          	fence
+    2870:	51e0d073          	csrwi	tohost,1
+    2874:	0000006f          	j	2874 <pass+0x8>

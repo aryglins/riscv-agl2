@@ -1,0 +1,34 @@
+#=======================================================================
+# UCB CS250 Makefile fragment for benchmarks
+#-----------------------------------------------------------------------
+#
+# Each benchmark directory should have its own fragment which
+# essentially lists what the source files are and how to link them
+# into an riscv and/or host executable. All variables should include
+# the benchmark name as a prefix so that they are unique.
+#
+
+16-bit-matrix_c_src = \
+	16-bit-matrix.c \
+	#interrogator_controller.c \
+	#Serial.c\
+
+
+
+16-bit-matrix_riscv_src = \
+	crt.S \
+
+16-bit-matrix_c_objs     = $(patsubst %.c, %.o, $(16-bit-matrix_c_src))
+16-bit-matrix_riscv_objs = $(patsubst %.S, %.o, $(16-bit-matrix_riscv_src))
+
+16-bit-matrix_host_bin = 16-bit-matrix.host
+$(16-bit-matrix_host_bin): $(16-bit-matrix_c_src)
+	$(HOST_COMP) $^ -o $(16-bit-matrix_host_bin)
+
+16-bit-matrix_riscv_bin = 16-bit-matrix.riscv
+$(16-bit-matrix_riscv_bin): $(16-bit-matrix_c_objs) $(16-bit-matrix_riscv_objs)
+	$(RISCV_LINK) $(16-bit-matrix_c_objs) $(16-bit-matrix_riscv_objs) \
+    -o $(16-bit-matrix_riscv_bin) $(RISCV_LINK_OPTS)
+
+junk += $(16-bit-matrix_c_objs) $(16-bit-matrix_riscv_objs) \
+        $(16-bit-matrix_host_bin) $(16-bit-matrix_riscv_bin)

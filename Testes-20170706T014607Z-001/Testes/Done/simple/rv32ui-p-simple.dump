@@ -1,0 +1,14 @@
+
+rv32ui-p-simple:     file format elf32-littleriscv
+
+
+Disassembly of section .text:
+
+00002800 <_start>:
+    2800:	50b02573          	csrr	a0,hartid
+    2804:	00051063          	bnez	a0,2804 <_start+0x4>
+    2808:	04000513          	li	a0,64
+    280c:	50a53073          	csrc	status,a0
+    2810:	0ff0000f          	fence
+    2814:	51e0d073          	csrwi	tohost,1
+    2818:	0000006f          	j	2818 <_start+0x18>

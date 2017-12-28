@@ -1,0 +1,19 @@
+# depslib dependency file v1.0
+1496346198 source:c:\workspace\tg\cache_simulator\mem_gen\main.c
+	<stdio.h>
+	<stdlib.h>
+	<time.h>
+	<stdint.h>
+	<stdio.h>
+	<stdlib.h>
+	<time.h>
+
+1499359800 source:c:\workspace\tg\mem_gen\main.c
+	<stdio.h>
+	<stdlib.h>
+	<time.h>
+	<stdint.h>
+	<stdio.h>
+	<stdlib.h>
+	<time.h>
+

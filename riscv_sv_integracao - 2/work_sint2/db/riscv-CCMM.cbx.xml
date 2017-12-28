@@ -1,0 +1,9 @@
+<?xml version="1.0" ?>
+<LOG_ROOT>
+	<PROJECT NAME="riscv-CCMM">
+		<CBX_INST_ENTRY INSTANCE_NAME="|riscv_top|pll_50:pll_50|altpll:altpll_component" CBX_FILE_NAME="pll_50_altpll.v"/>
+		<CBX_INST_ENTRY INSTANCE_NAME="|riscv_top|riscv_wishbone:cpu|riscv_cpu_no:cpu1|riscv_alu:riscv_alu|lpm_mult:Mult0" CBX_FILE_NAME="mult_1ht.tdf"/>
+		<CBX_INST_ENTRY INSTANCE_NAME="|riscv_top|riscv_wishbone:cpu|rom:M0|altsyncram:altsyncram_component" CBX_FILE_NAME="altsyncram_hia1.tdf"/>
+		<CBX_INST_ENTRY INSTANCE_NAME="|riscv_top|riscv_wishbone:cpu|wshbn_slave_ram:SLV_RAM|ram:ram1|altsyncram:altsyncram_component" CBX_FILE_NAME="altsyncram_epk1.tdf"/>
+	</PROJECT>
+</LOG_ROOT>

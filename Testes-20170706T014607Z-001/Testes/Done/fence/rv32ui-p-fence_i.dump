@@ -1,0 +1,63 @@
+
+rv32ui-p-fence_i:     file format elf32-littleriscv
+
+
+Disassembly of section .text:
+
+00002000 <_start>:
+    2000:	50b02573          	csrr	a0,hartid
+    2004:	00051063          	bnez	a0,2004 <_start+0x4>
+    2008:	04000513          	li	a0,64
+    200c:	50a53073          	csrc	status,a0
+    2010:	06f00693          	li	a3,111
+    2014:	00000517          	auipc	a0,0x0
+    2018:	08050513          	addi	a0,a0,128 # 2094 <test_3+0x10>
+    201c:	00000597          	auipc	a1,0x0
+    2020:	02c58593          	addi	a1,a1,44 # 2048 <_start+0x48>
+    2024:	00000617          	auipc	a2,0x0
+    2028:	05c60613          	addi	a2,a2,92 # 2080 <test_2+0x34>
+    202c:	00052503          	lw	a0,0(a0)
+    2030:	00000013          	nop
+    2034:	00000013          	nop
+    2038:	00000013          	nop
+    203c:	00000013          	nop
+    2040:	00a5a023          	sw	a0,0(a1)
+    2044:	0000100f          	fence.i
+    2048:	0de68693          	addi	a3,a3,222
+
+0000204c <test_2>:
+    204c:	00000013          	nop
+    2050:	1bc00e93          	li	t4,444
+    2054:	00200e13          	li	t3,2
+    2058:	05d69263          	bne	a3,t4,209c <fail>
+    205c:	06400713          	li	a4,100
+    2060:	fff70713          	addi	a4,a4,-1
+    2064:	fe071ee3          	bnez	a4,2060 <test_2+0x14>
+    2068:	00a62023          	sw	a0,0(a2)
+    206c:	0000100f          	fence.i
+    2070:	00000013          	nop
+    2074:	00000013          	nop
+    2078:	00000013          	nop
+    207c:	00000013          	nop
+    2080:	22b68693          	addi	a3,a3,555
+
+00002084 <test_3>:
+    2084:	00000013          	nop
+    2088:	30900e93          	li	t4,777
+    208c:	00300e13          	li	t3,3
+    2090:	01d69663          	bne	a3,t4,209c <fail>
+    2094:	14d68693          	addi	a3,a3,333
+    2098:	01c01e63          	bne	zero,t3,20b4 <pass>
+
+0000209c <fail>:
+    209c:	0ff0000f          	fence
+    20a0:	000e0863          	beqz	t3,20b0 <fail+0x14>
+    20a4:	001e1e13          	slli	t3,t3,0x1
+    20a8:	001e6e13          	ori	t3,t3,1
+    20ac:	51ee1073          	csrw	tohost,t3
+    20b0:	0000006f          	j	20b0 <fail+0x14>
+
+000020b4 <pass>:
+    20b4:	0ff0000f          	fence
+    20b8:	51e0d073          	csrwi	tohost,1
+    20bc:	0000006f          	j	20bc <pass+0x8>

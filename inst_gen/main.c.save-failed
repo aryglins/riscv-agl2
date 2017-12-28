@@ -1,0 +1,264 @@
+#include <stdio.h>
+#include <stdlib.h>
+#include <time.h>
+#define LOAD_TYPE 0
+#define STORE_TYPE 1
+#define LOAD_INST "LD"
+#define STORE_INST "ST"
+#define INST_FILENAME "inst.in"
+#define INST_MIF_FILE "inst.mif"
+#define RISCV_MIF "rom.mif"
+#define N_INST 100
+#define DEPTH 4096
+#define RAM_WIDTH 68
+
+
+#define RISCV_ROM_WIDTH 32
+#define RISCV_ROM_DEPTH 2048
+
+#define	LUI 		0x37
+#define ARTI 		0x13
+#define ADDI_FUNCT 	0x0
+#define OR_FUNCT 	0x6
+#define SW			0x23
+#define SW_FUNCT    0x2
+#define LW	    	0x3
+#define LW_FUNCT    0x2
+#define BASE        0x1
+
+#define R_0			0x0
+#define R_t0			0x5
+#define R_t1		    0x6
+
+#define NOP         0x13
+#define ART         0x33
+#define XOR_FUNCT   0x4
+#define ADD_FUNCT   0x0
+
+void gen_riscv_mif (unsigned * addr_vec, unsigned * inst_vec, unsigned * data_vec) {
+	FILE *riscv_mif;
+	unsigned inst_type;
+    unsigned address;
+    unsigned value;
+	unsigned lui_value;
+	unsigned inst;
+
+	unsigned inst_rom_addr = 0;
+
+	if((riscv_mif = fopen(RISCV_MIF, "wb")) == NULL) {
+        printf("Unable to open file %s!\n", INST_FILENAME);
+        exit(1);
+    }
+
+	fprintf(riscv_mif, "WIDTH=%u;\n", RISCV_ROM_WIDTH);
+    fprintf(riscv_mif, "DEPTH=%u;\n", RISCV_ROM_DEPTH);
+    fprintf(riscv_mif, "ADDRESS_RADIX=%s;\n", "HEX");
+    fprintf(riscv_mif, "DATA_RADIX=%s;\n", "HEX");
+    fprintf(riscv_mif, "CONTENT BEGIN\n\n");
+
+    inst = 0x20b7;
+
+    if( fprintf(riscv_mif, "%x:%.8x;\n", inst_rom_addr, NOP) <0) {
+        printf("Error writing file line %d\n", 0);
+        exit(1);
+    }
+	inst_rom_addr++;
+    if( fprintf(riscv_mif, "%x:%.8x;\n", inst_rom_addr, inst) <0) {
+        printf("Error writing file line %d\n", 0);
+        exit(1);
+    }
+	inst_rom_addr++;
+    if( fprintf(riscv_mif, "%x:%.8x;\n", inst_rom_addr, NOP) <0) {
+        printf("Error writing file line %d\n", 0);
+        exit(1);
+    }
+	inst_rom_addr++;
+
+	for(int i = 0; i < N_INST;  i++) {
+        inst_type = inst_vec[i];
+        address = addr_vec[i];
+        value = data_vec[i];
+
+		if(inst_type == LOAD_TYPE) {
+			inst = LW + (R_t0 << 7) + (LW_FUNCT << 12) + (BASE << 15);
+            inst = inst + (address << 20);
+
+			if( fprintf(riscv_mif, "%x:%.8x;\n", inst_rom_addr, inst) <0) {
+				printf("Error writing file line %d\n", i);
+				exit(1);
+			}
+			inst_rom_addr++;
+			if( fprintf(riscv_mif, "%x:%.8x;\n", inst_rom_addr, NOP) <0) {
+				printf("Error writing file line %d\n", i);
+				exit(1);
+			}
+			inst_rom_addr++;
+
+        }else if(inst_type == STORE_TYPE) {
+            lui_value = value >> 12;
+			value = value % (1 << 12);
+
+			inst = ARTI + (R_t1 << 7) + (ADDI_FUNCT << 12) + (R_0 << 15) + (value << 20);
+
+			if( fprintf(riscv_mif, "%x:%.8x;\n", inst_rom_addr, inst) <0) {
+				printf("Error writing file line %d\n", i);
+				exit(1);
+			}
+			inst_rom_addr++;
+
+			if( fprintf(riscv_mif, "%x:%.8x;\n", inst_rom_addr, NOP) <0) {
+				printf("Error writing file line %d\n", i);
+				exit(1);
+			}
+			inst_rom_addr++;
+
+			inst = LUI + (R_t0 << 7) + (lui_value << 12);
+
+			if( fprintf(riscv_mif, "%x:%.8x;\n", inst_rom_addr, inst) <0) {
+				printf("Error writing file line %d\n", i);
+				exit(1);
+			}
+			inst_rom_addr++;
+
+			if( fprintf(riscv_mif, "%x:%.8x;\n", inst_rom_addr, NOP) <0) {
+				printf("Error writing file line %d\n", i);
+				exit(1);
+			}
+			inst_rom_addr++;
+
+            inst = ART + (R_t0 << 7) + (ADD_FUNCT << 12) + (R_t0 << 15) + (R_t1 << 20);
+
+			if( fprintf(riscv_mif, "%x:%.8x;\n", inst_rom_addr, inst) <0) {
+				printf("Error writing file line %d\n", i);
+				exit(1);
+			}
+			inst_rom_addr++;
+
+			if( fprintf(riscv_mif, "%x:%.8x;\n", inst_rom_addr, NOP) <0) {
+				printf("Error writing file line %d\n", i);
+				exit(1);
+			}
+			inst_rom_addr++;
+
+			inst = SW + (SW_FUNCT << 12) + (BASE << 15) + (R_t1 << 20);
+            inst = inst + ((address % (1 << 5)) << 7) + ((address >> 5) << 25);
+
+			if( fprintf(riscv_mif, "%x:%.8x;\n", inst_rom_addr, inst) <0) {
+				printf("Error writing file line %d\n", i);
+				exit(1);
+			}
+			inst_rom_addr++;
+			if( fprintf(riscv_mif, "%x:%.8x;\n", inst_rom_addr, NOP) <0) {
+				printf("Error writing file line %d\n", i);
+				exit(1);
+			}
+			inst_rom_addr++;
+        }
+    }
+    if( fprintf(riscv_mif, "%x:%.8x;\n", inst_rom_addr, NOP) <0) {
+            printf("Error writing file line %d\n", -1);
+            exit(1);
+    }
+    inst_rom_addr++;
+    if( fprintf(riscv_mif, "%x:%.8x;\n", inst_rom_addr, 0x6f) <0) {
+            printf("Error writing file line %d\n", -1);
+            exit(1);
+    }
+    inst_rom_addr++;
+    fprintf(riscv_mif, "[%x..%x]:%.8x;\n", inst_rom_addr, RISCV_ROM_DEPTH-1, 0x0);
+	fprintf(riscv_mif, "\nEND;");
+}
+
+
+void gen_model_mem_fp_mif (unsigned * addr_vec, unsigned * inst_vec, unsigned * data_vec) {
+
+    FILE *ptr_fp;
+    FILE *ptr_fp_mif;
+	unsigned inst_type;
+    unsigned address;
+    unsigned value;
+
+    if((ptr_fp = fopen(INST_FILENAME, "wb")) == NULL) {
+        printf("Unable to open file %s!\n", INST_FILENAME);
+        exit(1);
+    }
+
+    if((ptr_fp_mif = fopen(INST_MIF_FILE, "wb")) == NULL) {
+            printf("Unable to open file %s!\n", INST_MIF_FILE);
+            exit(1);
+    }
+
+    fprintf(ptr_fp_mif, "WIDTH=%u;\n", RAM_WIDTH);
+    fprintf(ptr_fp_mif, "DEPTH=%u;\n", N_INST);
+    fprintf(ptr_fp_mif, "ADDRESS_RADIX=%s;\n", "HEX");
+    fprintf(ptr_fp_mif, "DATA_RADIX=%s;\n", "HEX");
+    fprintf(ptr_fp_mif, "CONTENT BEGIN\n\n");
+
+	for(int i = 0; i < N_INST;  i++) {
+        inst_type = inst_vec[i];
+        address = addr_vec[i];
+        value = data_vec[i];
+
+        if(inst_type == LOAD_TYPE) {
+            if( fprintf(ptr_fp, "%s %.8x\n", LOAD_INST, address) <0) {
+                printf("Error writing file line %d\n", i);
+                exit(1);
+            }
+
+            if( fprintf(ptr_fp_mif, "%x:%.1x%.8x%.8x;\n", i, 0x0, address, 0x0) <0) {
+                printf("Error writing file line %d\n", i);
+                exit(1);
+            }
+        }else {
+            if( fprintf(ptr_fp, "%s %.8x %.8x\n", STORE_INST, address, value) <0) {
+                printf("Error writing file line %d\n", i);
+                exit(1);
+            }
+            if( fprintf(ptr_fp_mif, "%x:%.1x%.8x%.8x;\n", i, 0x1, address, value) <0) {
+                printf("Error writing file line %d\n", i);
+                exit(1);
+            }
+        }
+    }
+
+    if( fprintf(ptr_fp_mif, "%x:%.1x%.8x%.8x;\n", N_INST, 0x2, 0x0, 0x0) <0) {
+        printf("Error writing file line %d\n", N_INST-1);
+        exit(1);
+    }
+
+   	fprintf(ptr_fp_mif, "[%x..%x]:%.8x;\n", N_INST+1, RISCV_ROM_DEPTH-1, 0x0);
+
+    fprintf(ptr_fp_mif, "\nEND;");
+}
+
+void gen_alu_test()
+
+
+int main()
+{
+    srand(time(NULL));   // should only be called once
+    unsigned inst_type;
+    unsigned address;
+    unsigned value;
+
+	unsigned inst_type_vec[N_INST] = {0, 1};
+	unsigned addr_vec	 [N_INST] = {0, 0};
+	unsigned data_vec	 [N_INST] = {1, 1};
+
+    for(int i = 0; i < N_INST;  i++) {
+        inst_type = rand()%2;
+        address = (4*(rand()%(DEPTH/4)))%0x800;
+        value = rand();
+
+    	inst_type_vec[i] = inst_type;
+        addr_vec[i] =       address;
+        data_vec[i] =       value;
+
+    }
+
+    gen_riscv_mif(addr_vec, inst_type_vec, data_vec);
+    gen_model_mem_fp_mif(addr_vec, inst_type_vec, data_vec);
+
+    printf("Generation Successful!\n");
+    return 0;
+}

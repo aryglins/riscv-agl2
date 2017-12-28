@@ -1,0 +1,1 @@
+Warning (10268): Verilog HDL information at riscv_decoder.sv(154): always construct contains both blocking and non-blocking assignments

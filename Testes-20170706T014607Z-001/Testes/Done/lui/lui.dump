@@ -1,0 +1,58 @@
+
+rv32ui-p-lui:     file format elf32-littleriscv
+
+
+Disassembly of section .text:
+
+00002800 <_start>:
+    2800:	50b02573          	csrr	a0,hartid
+    2804:	00051063          	bnez	a0,2804 <_start+0x4>
+    2808:	04000513          	li	a0,64
+    280c:	50a53073          	csrc	status,a0
+
+00002810 <test_2>:
+    2810:	000000b7          	lui	ra,0x0
+    2814:	00000e93          	li	t4,0
+    2818:	00200e13          	li	t3,2
+    281c:	05d09a63          	bne	ra,t4,2870 <fail>
+
+00002820 <test_3>:
+    2820:	fffff0b7          	lui	ra,0xfffff
+    2824:	4010d093          	srai	ra,ra,0x1
+    2828:	80000e93          	li	t4,-2048
+    282c:	00300e13          	li	t3,3
+    2830:	05d09063          	bne	ra,t4,2870 <fail>
+
+00002834 <test_4>:
+    2834:	7ffff0b7          	lui	ra,0x7ffff
+    2838:	4140d093          	srai	ra,ra,0x14
+    283c:	7ff00e93          	li	t4,2047
+    2840:	00400e13          	li	t3,4
+    2844:	03d09663          	bne	ra,t4,2870 <fail>
+
+00002848 <test_5>:
+    2848:	800000b7          	lui	ra,0x80000
+    284c:	4140d093          	srai	ra,ra,0x14
+    2850:	80000e93          	li	t4,-2048
+    2854:	00500e13          	li	t3,5
+    2858:	01d09c63          	bne	ra,t4,2870 <fail>
+
+0000285c <test_6>:
+    285c:	80000037          	lui	zero,0x80000
+    2860:	00000e93          	li	t4,0 # 80000000 <_end+0x7fffd76c>
+    2864:	00600e13          	li	t3,6
+    2868:	01d01463          	bne	zero,t4,2870 <fail>
+    286c:	01c01e63          	bne	zero,t3,2888 <pass>
+
+00002870 <fail>:
+    2870:	0ff0000f          	fence
+    2874:	000e0863          	beqz	t3,2884 <fail+0x14>
+    2878:	001e1e13          	slli	t3,t3,0x1
+    287c:	001e6e13          	ori	t3,t3,1
+    2880:	51ee1073          	csrw	tohost,t3
+    2884:	0000006f          	j	2884 <fail+0x14>
+
+00002888 <pass>:
+    2888:	0ff0000f          	fence
+    288c:	51e0d073          	csrwi	tohost,1
+    2890:	0000006f          	j	2890 <pass+0x8>

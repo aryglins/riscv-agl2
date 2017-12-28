@@ -1,0 +1,41 @@
+
+rv32ui-p-j:     file format elf32-littleriscv
+
+
+Disassembly of section .text:
+
+00002800 <_start>:
+    2800:	50b02573          	csrr	a0,hartid
+    2804:	00051063          	bnez	a0,2804 <_start+0x4>
+    2808:	04000513          	li	a0,64
+    280c:	50a53073          	csrc	status,a0
+    2810:	00200e13          	li	t3,2
+    2814:	0080006f          	j	281c <test_2>
+    2818:	0340006f          	j	284c <fail>
+
+0000281c <test_2>:
+    281c:	00100093          	li	ra,1
+    2820:	0140006f          	j	2834 <test_2+0x18>
+    2824:	00108093          	addi	ra,ra,1
+    2828:	00108093          	addi	ra,ra,1
+    282c:	00108093          	addi	ra,ra,1
+    2830:	00108093          	addi	ra,ra,1
+    2834:	00108093          	addi	ra,ra,1
+    2838:	00108093          	addi	ra,ra,1
+    283c:	00300e93          	li	t4,3
+    2840:	00300e13          	li	t3,3
+    2844:	01d09463          	bne	ra,t4,284c <fail>
+    2848:	01c01e63          	bne	zero,t3,2864 <pass>
+
+0000284c <fail>:
+    284c:	0ff0000f          	fence
+    2850:	000e0863          	beqz	t3,2860 <fail+0x14>
+    2854:	001e1e13          	slli	t3,t3,0x1
+    2858:	001e6e13          	ori	t3,t3,1
+    285c:	51ee1073          	csrw	tohost,t3
+    2860:	0000006f          	j	2860 <fail+0x14>
+
+00002864 <pass>:
+    2864:	0ff0000f          	fence
+    2868:	51e0d073          	csrwi	tohost,1
+    286c:	0000006f          	j	286c <pass+0x8>

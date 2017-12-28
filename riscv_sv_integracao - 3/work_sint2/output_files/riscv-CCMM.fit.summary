@@ -1,0 +1,20 @@
+Fitter Status : Successful - Sun Jul 09 12:15:44 2017
+Quartus II 64-Bit Version : 13.1.0 Build 162 10/23/2013 SJ Full Version
+Revision Name : riscv-CCMM
+Top-level Entity Name : riscv_top
+Family : Cyclone IV GX
+Device : EP4CGX150DF31C7
+Timing Models : Final
+Total logic elements : 27,204 / 149,760 ( 18 % )
+    Total combinational functions : 17,625 / 149,760 ( 12 % )
+    Dedicated logic registers : 10,901 / 149,760 ( 7 % )
+Total registers : 10901
+Total pins : 30 / 508 ( 6 % )
+Total virtual pins : 0
+Total memory bits : 131,072 / 6,635,520 ( 2 % )
+Embedded Multiplier 9-bit elements : 8 / 720 ( 1 % )
+Total GXB Receiver Channel PCS : 0 / 8 ( 0 % )
+Total GXB Receiver Channel PMA : 0 / 8 ( 0 % )
+Total GXB Transmitter Channel PCS : 0 / 8 ( 0 % )
+Total GXB Transmitter Channel PMA : 0 / 8 ( 0 % )
+Total PLLs : 1 / 8 ( 13 % )

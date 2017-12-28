@@ -1,0 +1,14 @@
++incdir+..
+../cpu/riscv_div.sv
+../cpu/comparator.sv
+../cpu/inst_mem_ctrl.sv
+../cpu/interrupt_controller.sv
+../cpu/mem_ctrl.sv
+../cpu/riscv_alu.sv
+../cpu/riscv_cpu_no.sv
+../cpu/riscv_decoder.sv
+../cpu/riscv_fetch.sv
+../cpu/riscv_regfile.sv
+../cpu/sram_mux.sv
+../riscv_wishbone.sv
+../riscv_tb.sv

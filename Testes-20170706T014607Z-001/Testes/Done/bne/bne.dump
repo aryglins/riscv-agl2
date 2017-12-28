@@ -1,0 +1,241 @@
+
+rv32ui-p-bne:     file format elf32-littleriscv
+
+
+Disassembly of section .text:
+
+00002800 <_start>:
+    2800:	50b02573          	csrr	a0,hartid
+    2804:	00051063          	bnez	a0,2804 <_start+0x4>
+    2808:	04000513          	li	a0,64
+    280c:	50a53073          	csrc	status,a0
+
+00002810 <test_2>:
+    2810:	00200e13          	li	t3,2
+    2814:	00000093          	li	ra,0
+    2818:	00100113          	li	sp,1
+    281c:	00209663          	bne	ra,sp,2828 <test_2+0x18>
+    2820:	2bc01a63          	bne	zero,t3,2ad4 <fail>
+    2824:	01c01663          	bne	zero,t3,2830 <test_3>
+    2828:	fe209ee3          	bne	ra,sp,2824 <test_2+0x14>
+    282c:	2bc01463          	bne	zero,t3,2ad4 <fail>
+
+00002830 <test_3>:
+    2830:	00300e13          	li	t3,3
+    2834:	00100093          	li	ra,1
+    2838:	00000113          	li	sp,0
+    283c:	00209663          	bne	ra,sp,2848 <test_3+0x18>
+    2840:	29c01a63          	bne	zero,t3,2ad4 <fail>
+    2844:	01c01663          	bne	zero,t3,2850 <test_4>
+    2848:	fe209ee3          	bne	ra,sp,2844 <test_3+0x14>
+    284c:	29c01463          	bne	zero,t3,2ad4 <fail>
+
+00002850 <test_4>:
+    2850:	00400e13          	li	t3,4
+    2854:	fff00093          	li	ra,-1
+    2858:	00100113          	li	sp,1
+    285c:	00209663          	bne	ra,sp,2868 <test_4+0x18>
+    2860:	27c01a63          	bne	zero,t3,2ad4 <fail>
+    2864:	01c01663          	bne	zero,t3,2870 <test_5>
+    2868:	fe209ee3          	bne	ra,sp,2864 <test_4+0x14>
+    286c:	27c01463          	bne	zero,t3,2ad4 <fail>
+
+00002870 <test_5>:
+    2870:	00500e13          	li	t3,5
+    2874:	00100093          	li	ra,1
+    2878:	fff00113          	li	sp,-1
+    287c:	00209663          	bne	ra,sp,2888 <test_5+0x18>
+    2880:	25c01a63          	bne	zero,t3,2ad4 <fail>
+    2884:	01c01663          	bne	zero,t3,2890 <test_6>
+    2888:	fe209ee3          	bne	ra,sp,2884 <test_5+0x14>
+    288c:	25c01463          	bne	zero,t3,2ad4 <fail>
+
+00002890 <test_6>:
+    2890:	00600e13          	li	t3,6
+    2894:	00000093          	li	ra,0
+    2898:	00000113          	li	sp,0
+    289c:	00209463          	bne	ra,sp,28a4 <test_6+0x14>
+    28a0:	01c01463          	bne	zero,t3,28a8 <test_6+0x18>
+    28a4:	23c01863          	bne	zero,t3,2ad4 <fail>
+    28a8:	fe209ee3          	bne	ra,sp,28a4 <test_6+0x14>
+
+000028ac <test_7>:
+    28ac:	00700e13          	li	t3,7
+    28b0:	00100093          	li	ra,1
+    28b4:	00100113          	li	sp,1
+    28b8:	00209463          	bne	ra,sp,28c0 <test_7+0x14>
+    28bc:	01c01463          	bne	zero,t3,28c4 <test_7+0x18>
+    28c0:	21c01a63          	bne	zero,t3,2ad4 <fail>
+    28c4:	fe209ee3          	bne	ra,sp,28c0 <test_7+0x14>
+
+000028c8 <test_8>:
+    28c8:	00800e13          	li	t3,8
+    28cc:	fff00093          	li	ra,-1
+    28d0:	fff00113          	li	sp,-1
+    28d4:	00209463          	bne	ra,sp,28dc <test_8+0x14>
+    28d8:	01c01463          	bne	zero,t3,28e0 <test_8+0x18>
+    28dc:	1fc01c63          	bne	zero,t3,2ad4 <fail>
+    28e0:	fe209ee3          	bne	ra,sp,28dc <test_8+0x14>
+
+000028e4 <test_9>:
+    28e4:	00900e13          	li	t3,9
+    28e8:	00000213          	li	tp,0
+    28ec:	00000093          	li	ra,0
+    28f0:	00000113          	li	sp,0
+    28f4:	1e209063          	bne	ra,sp,2ad4 <fail>
+    28f8:	00120213          	addi	tp,tp,1 # 1 <_RAM_START+0x1>
+    28fc:	00200293          	li	t0,2
+    2900:	fe5216e3          	bne	tp,t0,28ec <test_9+0x8>
+
+00002904 <test_10>:
+    2904:	00a00e13          	li	t3,10
+    2908:	00000213          	li	tp,0
+    290c:	00000093          	li	ra,0
+    2910:	00000113          	li	sp,0
+    2914:	00000013          	nop
+    2918:	1a209e63          	bne	ra,sp,2ad4 <fail>
+    291c:	00120213          	addi	tp,tp,1 # 1 <_RAM_START+0x1>
+    2920:	00200293          	li	t0,2
+    2924:	fe5214e3          	bne	tp,t0,290c <test_10+0x8>
+
+00002928 <test_11>:
+    2928:	00b00e13          	li	t3,11
+    292c:	00000213          	li	tp,0
+    2930:	00000093          	li	ra,0
+    2934:	00000113          	li	sp,0
+    2938:	00000013          	nop
+    293c:	00000013          	nop
+    2940:	18209a63          	bne	ra,sp,2ad4 <fail>
+    2944:	00120213          	addi	tp,tp,1 # 1 <_RAM_START+0x1>
+    2948:	00200293          	li	t0,2
+    294c:	fe5212e3          	bne	tp,t0,2930 <test_11+0x8>
+
+00002950 <test_12>:
+    2950:	00c00e13          	li	t3,12
+    2954:	00000213          	li	tp,0
+    2958:	00000093          	li	ra,0
+    295c:	00000013          	nop
+    2960:	00000113          	li	sp,0
+    2964:	16209863          	bne	ra,sp,2ad4 <fail>
+    2968:	00120213          	addi	tp,tp,1 # 1 <_RAM_START+0x1>
+    296c:	00200293          	li	t0,2
+    2970:	fe5214e3          	bne	tp,t0,2958 <test_12+0x8>
+
+00002974 <test_13>:
+    2974:	00d00e13          	li	t3,13
+    2978:	00000213          	li	tp,0
+    297c:	00000093          	li	ra,0
+    2980:	00000013          	nop
+    2984:	00000113          	li	sp,0
+    2988:	00000013          	nop
+    298c:	14209463          	bne	ra,sp,2ad4 <fail>
+    2990:	00120213          	addi	tp,tp,1 # 1 <_RAM_START+0x1>
+    2994:	00200293          	li	t0,2
+    2998:	fe5212e3          	bne	tp,t0,297c <test_13+0x8>
+
+0000299c <test_14>:
+    299c:	00e00e13          	li	t3,14
+    29a0:	00000213          	li	tp,0
+    29a4:	00000093          	li	ra,0
+    29a8:	00000013          	nop
+    29ac:	00000013          	nop
+    29b0:	00000113          	li	sp,0
+    29b4:	12209063          	bne	ra,sp,2ad4 <fail>
+    29b8:	00120213          	addi	tp,tp,1 # 1 <_RAM_START+0x1>
+    29bc:	00200293          	li	t0,2
+    29c0:	fe5212e3          	bne	tp,t0,29a4 <test_14+0x8>
+
+000029c4 <test_15>:
+    29c4:	00f00e13          	li	t3,15
+    29c8:	00000213          	li	tp,0
+    29cc:	00000093          	li	ra,0
+    29d0:	00000113          	li	sp,0
+    29d4:	10209063          	bne	ra,sp,2ad4 <fail>
+    29d8:	00120213          	addi	tp,tp,1 # 1 <_RAM_START+0x1>
+    29dc:	00200293          	li	t0,2
+    29e0:	fe5216e3          	bne	tp,t0,29cc <test_15+0x8>
+
+000029e4 <test_16>:
+    29e4:	01000e13          	li	t3,16
+    29e8:	00000213          	li	tp,0
+    29ec:	00000093          	li	ra,0
+    29f0:	00000113          	li	sp,0
+    29f4:	00000013          	nop
+    29f8:	0c209e63          	bne	ra,sp,2ad4 <fail>
+    29fc:	00120213          	addi	tp,tp,1 # 1 <_RAM_START+0x1>
+    2a00:	00200293          	li	t0,2
+    2a04:	fe5214e3          	bne	tp,t0,29ec <test_16+0x8>
+
+00002a08 <test_17>:
+    2a08:	01100e13          	li	t3,17
+    2a0c:	00000213          	li	tp,0
+    2a10:	00000093          	li	ra,0
+    2a14:	00000113          	li	sp,0
+    2a18:	00000013          	nop
+    2a1c:	00000013          	nop
+    2a20:	0a209a63          	bne	ra,sp,2ad4 <fail>
+    2a24:	00120213          	addi	tp,tp,1 # 1 <_RAM_START+0x1>
+    2a28:	00200293          	li	t0,2
+    2a2c:	fe5212e3          	bne	tp,t0,2a10 <test_17+0x8>
+
+00002a30 <test_18>:
+    2a30:	01200e13          	li	t3,18
+    2a34:	00000213          	li	tp,0
+    2a38:	00000093          	li	ra,0
+    2a3c:	00000013          	nop
+    2a40:	00000113          	li	sp,0
+    2a44:	08209863          	bne	ra,sp,2ad4 <fail>
+    2a48:	00120213          	addi	tp,tp,1 # 1 <_RAM_START+0x1>
+    2a4c:	00200293          	li	t0,2
+    2a50:	fe5214e3          	bne	tp,t0,2a38 <test_18+0x8>
+
+00002a54 <test_19>:
+    2a54:	01300e13          	li	t3,19
+    2a58:	00000213          	li	tp,0
+    2a5c:	00000093          	li	ra,0
+    2a60:	00000013          	nop
+    2a64:	00000113          	li	sp,0
+    2a68:	00000013          	nop
+    2a6c:	06209463          	bne	ra,sp,2ad4 <fail>
+    2a70:	00120213          	addi	tp,tp,1 # 1 <_RAM_START+0x1>
+    2a74:	00200293          	li	t0,2
+    2a78:	fe5212e3          	bne	tp,t0,2a5c <test_19+0x8>
+
+00002a7c <test_20>:
+    2a7c:	01400e13          	li	t3,20
+    2a80:	00000213          	li	tp,0
+    2a84:	00000093          	li	ra,0
+    2a88:	00000013          	nop
+    2a8c:	00000013          	nop
+    2a90:	00000113          	li	sp,0
+    2a94:	04209063          	bne	ra,sp,2ad4 <fail>
+    2a98:	00120213          	addi	tp,tp,1 # 1 <_RAM_START+0x1>
+    2a9c:	00200293          	li	t0,2
+    2aa0:	fe5212e3          	bne	tp,t0,2a84 <test_20+0x8>
+
+00002aa4 <test_21>:
+    2aa4:	00100093          	li	ra,1
+    2aa8:	00009a63          	bnez	ra,2abc <test_21+0x18>
+    2aac:	00108093          	addi	ra,ra,1
+    2ab0:	00108093          	addi	ra,ra,1
+    2ab4:	00108093          	addi	ra,ra,1
+    2ab8:	00108093          	addi	ra,ra,1
+    2abc:	00108093          	addi	ra,ra,1
+    2ac0:	00108093          	addi	ra,ra,1
+    2ac4:	00300e93          	li	t4,3
+    2ac8:	01500e13          	li	t3,21
+    2acc:	01d09463          	bne	ra,t4,2ad4 <fail>
+    2ad0:	01c01e63          	bne	zero,t3,2aec <pass>
+
+00002ad4 <fail>:
+    2ad4:	0ff0000f          	fence
+    2ad8:	000e0863          	beqz	t3,2ae8 <fail+0x14>
+    2adc:	001e1e13          	slli	t3,t3,0x1
+    2ae0:	001e6e13          	ori	t3,t3,1
+    2ae4:	51ee1073          	csrw	tohost,t3
+    2ae8:	0000006f          	j	2ae8 <fail+0x14>
+
+00002aec <pass>:
+    2aec:	0ff0000f          	fence
+    2af0:	51e0d073          	csrwi	tohost,1
+    2af4:	0000006f          	j	2af4 <pass+0x8>

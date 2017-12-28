@@ -1,0 +1,9 @@
+../cpu/i_cache.vhd
+../wsbn/wshbn_master_no.vhd
+../wsbn/wshbn_pio.vhd
+../wsbn/wshbn_timer.vhd
+../uart/wshbn_uart.vhd
+../uart/uart_fifo.vhd
+../uart/tx_module.vhd
+../uart/tx_fifo.vhd
+../uart/receiver.vhd
